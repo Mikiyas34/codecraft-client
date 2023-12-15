@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="58px" height="60px" viewBox="0 0 58 60" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g id="profile-icon">
+    <g id="Group-3" transform="translate(3.3515882 3.3515882)">
+      <path d="M0 25.9748C0 11.6293 11.6293 0 25.9748 0C40.3203 0 51.9496 11.6293 51.9496 25.9748C51.9496 40.3203 40.3203 51.9496 25.9748 51.9496C11.6293 51.9496 0 40.3203 0 25.9748Z" id="Ellipse" fill="none" fill-rule="evenodd" stroke="#808080" stroke-width="5" />
+      <path d="M15.0821 21.3665C15.0821 15.1192 20.1465 10.0549 26.3938 10.0549C32.641 10.0549 37.7054 15.1192 37.7054 21.3665C37.7054 27.6137 32.641 32.6781 26.3938 32.6781C20.1465 32.6781 15.0821 27.6137 15.0821 21.3665Z" id="Ellipse-Copy" fill="none" fill-rule="evenodd" stroke="#808080" stroke-width="5" />
+      <path d="M8.37897 43.5706C8.37897 43.5706 6.9625 36.1613 20.1095 30.1643" id="New-shape" fill="none" fill-rule="evenodd" stroke="#808080" stroke-width="5" />
+      <path d="M34.3538 31.8401C34.3538 31.8401 43.8301 37.2786 43.5706 44.4085" id="New-shape-2" fill="none" fill-rule="evenodd" stroke="#808080" stroke-width="5" />
+    </g>
+  </g>
+</svg>

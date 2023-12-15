@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="44px" height="64px" viewBox="0 0 44 64" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g id="vcs-icon">
+    <g id="Group-3">
+      <path d="M0 8.37897C0 3.75139 3.75139 0 8.37897 0C13.0065 0 16.7579 3.75139 16.7579 8.37897C16.7579 13.0065 13.0065 16.7579 8.37897 16.7579C3.75139 16.7579 0 13.0065 0 8.37897Z" id="Ellipse" fill="none" fill-rule="evenodd" stroke="#808080" stroke-width="5" />
+      <path d="M26.8686 18.4337C26.8686 13.8061 30.62 10.0547 35.2475 10.0547C39.8751 10.0547 43.6265 13.8061 43.6265 18.4337C43.6265 23.0613 39.8751 26.8126 35.2475 26.8126C30.62 26.8126 26.8686 23.0613 26.8686 18.4337Z" id="Ellipse-Copy" fill="none" fill-rule="evenodd" stroke="#808080" stroke-width="5" />
+      <path d="M0.0558526 55.3012C0.0558526 50.6736 3.80725 46.9222 8.43482 46.9222C13.0624 46.9222 16.8138 50.6736 16.8138 55.3012C16.8138 59.9288 13.0624 63.6802 8.43482 63.6802C3.80725 63.6802 0.0558526 59.9288 0.0558526 55.3012Z" id="Ellipse-Copy-2" fill="none" fill-rule="evenodd" stroke="#808080" stroke-width="5" />
+      <path d="M8.65828 16.7578L8.65828 48.0393" id="New-shape" fill="none" fill-rule="evenodd" stroke="#808080" stroke-width="5" />
+      <path d="M9.21687 47.4808C9.21687 47.4808 6.58948 30.9809 34.0745 26.254" id="New-shape-2" fill="none" fill-rule="evenodd" stroke="#808080" stroke-width="5" />
+    </g>
+  </g>
+</svg>
