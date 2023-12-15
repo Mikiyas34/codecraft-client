@@ -1,0 +1,17 @@
+:host {
+  width: 2.4rem;
+  height: 100%;
+  background: #353535;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 3rem;
+    }
+  }
+}
