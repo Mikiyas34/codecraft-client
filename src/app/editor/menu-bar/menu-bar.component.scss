@@ -8,9 +8,16 @@ $dark-text-color: #a8a8a8;
 :host {
   width: 100%;
   background: #000;
+  @extend %flex-display;
+  justify-content: space-between;
+  padding-block: 0.2rem;
+
   .menus {
     @extend %flex-display;
-    gap: 2rem;
+    margin: 0;
+    gap: 1rem;
+    padding-left: 1rem;
+    font-size: 0.7rem;
     li {
       list-style: none;
       color: $dark-text-color;
@@ -20,7 +27,7 @@ $dark-text-color: #a8a8a8;
     @extend %flex-display;
     gap: 1rem;
     img {
-      width: 2rem;
+      width: 1.5rem;
     }
   }
 }

@@ -1,17 +1,23 @@
 :host {
-  width: 2.4rem;
+  width: 4rem;
   height: 100%;
-  background: #353535;
+  background: #0e0e0e;
   display: flex;
+  border-top: solid 1px #494949;
+
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  padding-block: 1rem;
+  box-sizing: border-box;
   div {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
     img {
-      width: 3rem;
+      width: 1.6rem;
+      cursor: pointer;
     }
   }
 }

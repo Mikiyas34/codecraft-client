@@ -7,22 +7,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditorModule } from './editor/editor.module';
+import { EditorComponent } from './editor/editor.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    // RouterModule.forRoot([
-    //   {
-    //     path: 'new',
-    //     component: NewProjectComponent,
-    //     data: { animation: 'newPage' },
-    //   },
-    //   {
-    //     path: 'new/blank',
-    //     component: BlankProjectComponent,
-    //     data: { animation: 'newBlankPage' },
-    //   },
-    //   { path: '', component: WorkspaceComponent },
-    // ]),
+    RouterModule.forRoot([
+      {
+        path: 'editor',
+        component: EditorComponent,
+        data: { animation: 'newPage' },
+      },
+    ]),
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
