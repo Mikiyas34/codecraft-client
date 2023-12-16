@@ -15,12 +15,27 @@ $dark-text-color: #a8a8a8;
   .menus {
     @extend %flex-display;
     margin: 0;
-    gap: 1rem;
     padding-left: 1rem;
     font-size: 0.7rem;
-    li {
-      list-style: none;
-      color: $dark-text-color;
+    .line {
+      border-bottom: solid 1px #bbbbbb;
+    }
+    .choices {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      background: #1d1d1d;
+      padding: 0.2rem;
+      width: 13rem;
+      border-radius: 2px;
+      box-shadow: #000000 1px 1px 6px 1px;
+      span {
+        padding: 0.2rem;
+        &:hover {
+          background: #000;
+          cursor: pointer;
+        }
+      }
     }
   }
   .layout-options {

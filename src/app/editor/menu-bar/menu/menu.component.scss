@@ -1,0 +1,13 @@
+$dark-text-color: #a8a8a8;
+:host {
+  color: $dark-text-color;
+
+  span {
+    padding: 0.1rem;
+    padding-inline: 0.4rem;
+    border-radius: 3px;
+    &:hover {
+      background: #282828;
+    }
+  }
+}

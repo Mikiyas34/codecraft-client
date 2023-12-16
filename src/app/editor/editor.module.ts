@@ -7,6 +7,8 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
 import { OpenedProjectsComponent } from './opened-projects/opened-projects.component';
 import { EditorComponent } from './editor.component';
+import { MenuComponent } from './menu-bar/menu/menu.component';
+import { MenuBarModule } from './menu-bar/menu-bar.module';
 
 @NgModule({
   declarations: [
@@ -15,10 +17,9 @@ import { EditorComponent } from './editor.component';
     PrimarySideBarComponent,
     PanelComponent,
     StatusBarComponent,
-    MenuBarComponent,
     TextEditorComponent,
     OpenedProjectsComponent,
   ],
-  imports: [],
+  imports: [MenuBarModule],
 })
 export class EditorModule {}
