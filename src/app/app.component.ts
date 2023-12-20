@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import { config } from 'config/config';
 import { slideInAnimation } from './animations';

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="104px" height="104px" viewBox="0 0 104 104" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path d="M0 0L104 0L104 104L0 104L0 0Z" id="path_1" />
+    <clipPath id="mask_1">
+      <use xlink:href="#path_1" />
+    </clipPath>
+  </defs>
+  <g id="refresh-icon">
+    <g id="search-icon">
+      <g id="Restart-icon">
+        <path d="M0 0L104 0L104 104L0 104L0 0Z" id="Background" fill="none" fill-rule="evenodd" stroke="none" />
+        <g clip-path="url(#mask_1)">
+          <path d="M86.6667 52C86.6667 71.1143 71.1144 86.6667 52 86.6667C32.8857 86.6667 17.3334 71.1143 17.3334 52C17.3334 41.08 22.4207 31.3387 30.3334 24.9817L30.3334 14.5297C17.4027 22.035 8.66669 36.0057 8.66669 52C8.66669 75.894 28.106 95.3333 52 95.3333C75.894 95.3333 95.3334 75.894 95.3334 52C95.3334 28.106 75.894 8.66666 52 8.66666L52 17.3333C71.1144 17.3333 86.6667 32.8857 86.6667 52L86.6667 52Z" id="Shape" fill="#FFFFFF" fill-rule="evenodd" stroke="none" />
+          <path d="M8.66669 8.66666L39 8.66666L39 39L8.66669 8.66666Z" id="Shape" fill="#FFFFFF" fill-rule="evenodd" stroke="none" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

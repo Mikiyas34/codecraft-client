@@ -20,6 +20,12 @@ $dark-text-color: #a8a8a8;
     .line {
       border-bottom: solid 1px #bbbbbb;
     }
+    input {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+    }
     .choices {
       display: flex;
       flex-direction: column;

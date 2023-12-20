@@ -5,8 +5,25 @@
       <span>New File</span>
       <span class="line">New Window</span>
 
-      <span>Open File</span>
-      <span>Open Folder</span>
+      <span>
+        Open File
+        <input
+          type="file"
+          name=""
+          id=""
+          (change)="onFilePickerChange($event)"
+        />
+      </span>
+      <span
+        >Open Folder
+        <input
+          type="file"
+          name=""
+          id=""
+          webkitdirectory
+          (change)="onFolderPickerChange($event)"
+        />
+      </span>
       <span>Open Recent</span>
       <span class="line">Open Workspace from File</span>
       <span>Add Folder to Workspace</span>
@@ -27,7 +44,7 @@
       <span class="line">Redo</span>
       <span>Cut</span>
       <span>Copy</span>
-      <span class="line">Paste</span>
+      <span class="line" (click)="pasteText()">Paste</span>
       <span>Find</span>
       <span class="line">Replace</span>
       <span>Find in Files</span>

@@ -1,0 +1,57 @@
+:host {
+  width: 100%;
+  height: 2rem;
+  border: solid 1px #494949;
+  border-left: none;
+  background: #000;
+  display: flex;
+  .file.active {
+    color: #a7a7a7;
+    background: #1d1d1d;
+    height: 100%;
+    border-bottom: solid #1d1d1d;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    padding-inline: 1rem;
+    position: relative;
+    img {
+      width: 0.57rem;
+    }
+    .close-icon {
+      position: absolute;
+      right: 0.2rem;
+      display: block;
+      filter: brightness(1.5);
+      margin-top: 3px;
+    }
+  }
+  .file {
+    gap: 0.3rem;
+
+    cursor: pointer;
+    color: #a7a7a7;
+    height: 100%;
+    border-bottom: solid #1d1d1d;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    border-right: solid 1px #494949;
+    padding-inline: 1rem;
+    position: relative;
+    img {
+      width: 0.57rem;
+    }
+    .close-icon {
+      display: none;
+      position: absolute;
+      right: 0.2rem;
+      margin-top: 3px;
+    }
+    &:hover {
+      .close-icon {
+        display: block;
+      }
+    }
+  }
+}

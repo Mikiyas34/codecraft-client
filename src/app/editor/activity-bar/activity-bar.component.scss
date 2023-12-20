@@ -19,5 +19,25 @@
       width: 1.6rem;
       cursor: pointer;
     }
+    .file-explorer {
+      position: relative;
+      &::after {
+        display: block;
+        content: "Explorer";
+        width: 4rem;
+        border: solid;
+        position: absolute;
+        color: #494949;
+      }
+      &::before {
+        display: block;
+        content: "";
+        width: 4rem;
+        border: solid;
+        transform: rotate(30deg);
+        position: absolute;
+        color: #494949;
+      }
+    }
   }
 }

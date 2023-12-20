@@ -13,4 +13,36 @@
   .left {
     display: flex;
   }
+
+  .space {
+    margin-inline: 0.2rem;
+  }
+  .ln {
+    position: relative;
+    display: flex;
+    color: #dbdbdb;
+    font-family: monospace;
+    cursor: text;
+  }
+  .word {
+    display: flex;
+  }
+  .ln.active {
+    background: #252525;
+  }
+  .keyword {
+    color: orange;
+  }
+  .string {
+    color: rgb(54, 255, 40);
+  }
+  .function {
+    color: yellow;
+  }
+  .cursor {
+    height: 100%;
+    width: 1.4px;
+    top: 0;
+    background: orange;
+  }
 }
