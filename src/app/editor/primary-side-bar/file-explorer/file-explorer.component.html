@@ -14,7 +14,12 @@
   </div>
 </div>
 <ul class="folders-and-files">
-  <li *ngFor="let file of files" class="file" (click)="openFile(file)">
+  <li
+    *ngFor="let file of files"
+    class="file"
+    (click)="openFile(file)"
+    [ngClass]="{ active: file == activeFile }"
+  >
     <img src="assets/file-icon.svg" alt="file icon" class="file-icon" />
     <span>
       {{ file.name }}

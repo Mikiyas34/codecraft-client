@@ -3,11 +3,28 @@
     src="assets/file-explorer-icon.svg"
     alt="file-explorer"
     class="file-explorer"
+    (click)="setActiveBar('FileExplorer')"
   />
-  <img src="assets/extension-icon.svg" alt="extension" />
-  <img src="assets/search-icon.svg" alt="search a text" />
-  <img src="assets/debug-icon.svg" alt="debug" />
-  <img src="assets/vcs-icon.svg" alt="version control system" />
+  <img
+    src="assets/extension-icon.svg"
+    alt="extension"
+    (click)="setActiveBar('Extensions')"
+  />
+  <img
+    src="assets/search-icon.svg"
+    alt="search a text"
+    (click)="setActiveBar('Search')"
+  />
+  <img
+    src="assets/debug-icon.svg"
+    alt="debug"
+    (click)="setActiveBar('Debug')"
+  />
+  <img
+    src="assets/vcs-icon.svg"
+    alt="version control system"
+    (click)="setActiveBar('VCS')"
+  />
 </div>
 <div>
   <img src="assets/profile-icon.svg" alt="view profile" />

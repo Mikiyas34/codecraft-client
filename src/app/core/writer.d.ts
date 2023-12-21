@@ -19,4 +19,6 @@ export interface IWriter {
   getLine(ln: number): HTMLElement | null | undefined;
   getChar(ln: number, col: number): HTMLElement | null | undefined;
   getCharPos(char: HTMLElement): { ln: number; col: number };
+  clearAll(): void;
+  getLineNumFromElem(elem: HTMLElement): number;
 }

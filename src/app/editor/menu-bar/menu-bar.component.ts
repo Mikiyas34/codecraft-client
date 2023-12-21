@@ -30,14 +30,7 @@ export class MenuBarComponent {
     console.log(e.target.files);
   }
   onFolderPickerChange(e: any) {
-    console.log(e.target.files);
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      // console.log(e.target?.result);
-      // writer.writeText(e.target?.result as string);
-    };
-
-    reader.readAsText(e.target.files[0]);
-    console.log(e.target.files);
+    const files = e.target.files;
+    this.data.files.next(files);
   }
 }

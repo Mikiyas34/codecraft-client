@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { cursor } from 'src/app/core/cursor';
 import { writer } from 'src/app/core/writer';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-text-area',
@@ -19,7 +20,7 @@ export class TextAreaComponent implements OnInit, AfterViewInit {
   @ViewChild('cursor') cursor?: ElementRef;
   @ViewChild('textArea') textArea?: ElementRef;
   @ViewChild('word') word?: ElementRef;
-
+  constructor(private data: DataService) {}
   ngAfterViewInit() {
     writer.elem = this.textArea?.nativeElement;
     cursor.elem = this.textArea?.nativeElement;
@@ -32,29 +33,44 @@ export class TextAreaComponent implements OnInit, AfterViewInit {
     writer.writeText(text);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.data.activeFile.subscribe((file) => {
+      writer.clearAll();
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        writer.writeText(e.target?.result as string);
+      };
+      reader.readAsText(file!);
+    });
+  }
 
   @HostListener('click', ['$event'])
   onClick(e: any) {
-    console.log('pos: ', writer.getCharPos(e.target));
-    if (!e.target.classList.contains('char')) {
-      this.focused = true;
-      return;
-    }
+    // if (!e.target.classList.contains('char')) {
+    //   this.focused = true;
+    //   return;
+    // }
     this.focused = true;
-    const cursorPos = writer.getCharPos(e.target);
-    cursor.moveTo(cursorPos.ln, cursorPos.col);
+    if (e.target.classList.contains('char')) {
+      const cursorPos = writer.getCharPos(e.target);
+      cursor.moveTo(cursorPos.ln, cursorPos.col);
+      this.activateLine(cursorPos.ln);
+    } else if (e.target.classList.contains('ln')) {
+      const lineNum = writer.getLineNumFromElem(e.target);
+      cursor.moveTo(lineNum, 4);
+      this.activateLine(lineNum);
+    }
+  }
+
+  activateLine(ln: number) {
     for (let i = 0; i < writer.linesCount(); i++) {
       writer.getLine(i)?.classList.remove('active');
     }
-    const line = writer.getLine(cursorPos.ln);
+    const line = writer.getLine(ln);
     line?.classList.add('active');
-    console.log(e.target);
   }
-
   @HostListener('document:keydown', ['$event'])
   onKeydown(e: any) {
-    console.log(e.code);
     if (!this.focused) {
       return;
     }
@@ -95,9 +111,7 @@ export class TextAreaComponent implements OnInit, AfterViewInit {
         writer.getLine(cursor.ln)?.classList.add('active');
         break;
       default:
-        writer.insertChar(e.key, cursor.ln, cursor.col);
-        cursor.moveTo(cursor.ln, cursor.col + 1);
-        console.log(cursor.ln + ' ' + cursor.col);
+        writer.insertChar(e.key, cursor.ln, cursor.col + 1);
     }
   }
 }

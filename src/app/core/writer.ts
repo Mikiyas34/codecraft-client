@@ -1,4 +1,4 @@
-import { convertTextToArray, placeByIndex } from '../util';
+import { convertTextToArray, placeByIndex, getIndexOfElem } from '../util';
 import { cursor } from './cursor';
 import { IWriter } from './writer.d';
 export const writer: IWriter = {
@@ -14,7 +14,16 @@ export const writer: IWriter = {
   insertChar: function (char: string, ln: number, col: number): void {
     const line = this.getLine(ln);
     const charElem = this.createChar(char);
-    line?.appendChild(charElem);
+    const prevChar = this.getChar(ln, col);
+    if (prevChar?.parentElement?.classList.contains('word')) {
+      const parentWord = prevChar.parentElement;
+      const index = getIndexOfElem(parentWord, prevChar);
+      placeByIndex(parentWord, charElem, index);
+      cursor.moveTo(ln, col);
+    } else {
+      line?.appendChild(charElem);
+      cursor.moveTo(cursor.ln, cursor.col + 1);
+    }
   },
   writeText(text: string) {
     if (this.linesCount() < 1) {
@@ -132,5 +141,21 @@ export const writer: IWriter = {
       }
     }
     return { ln: Ln, col: Col };
+  },
+  clearAll() {
+    const linesElem = this.elem?.querySelector('.lines');
+    const newLinesElem = linesElem?.cloneNode();
+    linesElem?.remove();
+    this.elem?.appendChild(newLinesElem!);
+  },
+  getLineNumFromElem(elem: HTMLElement): number {
+    const linesElem = this.elem?.querySelector('.lines');
+    for (let i = 0; i < linesElem!.children.length; i++) {
+      const line = linesElem?.children.item(i);
+      if (line?.isSameNode(elem)) {
+        return i;
+      }
+    }
+    return -1;
   },
 };

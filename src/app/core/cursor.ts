@@ -18,7 +18,11 @@ export const cursor: ICursor = {
     if (charElem?.parentElement?.classList.contains('word')) {
       const parentWord = charElem.parentElement;
       const index = getIndexOfElem(parentWord, charElem);
-      placeByIndex(parentWord, cursorElem, index);
+      placeByIndex(parentWord, cursorElem, index + 1);
+    } else {
+      const index = getIndexOfElem(line!, charElem!);
+      console.log('index of char: ', index);
+      placeByIndex(line!, cursorElem, index + 1);
     }
     // placeByIndex(line!, cursorElem, col);
   },
