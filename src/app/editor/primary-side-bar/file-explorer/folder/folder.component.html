@@ -1,0 +1,13 @@
+<div class="folder-name" (click)="toggleFolder()">
+  <img
+    class="arrow-icon"
+    src="assets/arrow-icon.svg"
+    alt="arrow icon"
+    [style.transform]="open ? '' : 'rotate(-90deg)'"
+  />
+  <img src="assets/folder-icon.svg" alt="folder icon" />
+  <span>{{ name | slice }}</span>
+</div>
+<div class="contents" *ngIf="open">
+  <ng-content></ng-content>
+</div>

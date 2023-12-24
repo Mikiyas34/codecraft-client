@@ -1,21 +1,17 @@
-<!-- <div class="file active">
-  <img src="assets/file-icon.svg" alt="file-icon" class="file-icon" />
-  <span class="name">index.ts</span>
-  <img src="assets/cancel-icon.svg" alt="close-icon" class="close-icon" />
-</div> -->
-
-<div
-  class="file"
-  [ngClass]="{ active: file == activeFile }"
-  *ngFor="let file of openedFiles"
-  (click)="setActiveFile(file)"
->
-  <img src="assets/file-icon.svg" alt="file-icon" class="file-icon" />
-  <span class="name">{{ file.name }}</span>
-  <img
-    src="assets/cancel-icon.svg"
-    alt="close-icon"
-    class="close-icon"
-    (click)="closeFile(file)"
-  />
+<div class="opened-files" *ngIf="openedFiles.length > 0">
+  <div
+    class="file"
+    [ngClass]="{ active: file == activeFile }"
+    *ngFor="let file of openedFiles"
+    (click)="setActiveFile(file)"
+  >
+    <img src="assets/file-icon.svg" alt="file-icon" class="file-icon" />
+    <span class="name">{{ file.name }}</span>
+    <img
+      src="assets/cancel-icon.svg"
+      alt="close-icon"
+      class="close-icon"
+      (click)="closeFile(file)"
+    />
+  </div>
 </div>

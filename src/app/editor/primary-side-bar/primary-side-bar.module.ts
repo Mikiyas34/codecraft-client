@@ -7,9 +7,19 @@ import { ExtensionsComponent } from './extensions/extensions.component';
 import { DebugComponent } from './debug/debug.component';
 import { SearchComponent } from './search/search.component';
 import { VcsComponent } from './vcs/vcs.component';
+import { FolderComponent } from './file-explorer/folder/folder.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
-  declarations: [PrimarySideBarComponent, FileExplorerComponent, ExtensionsComponent, DebugComponent, SearchComponent, VcsComponent],
+  declarations: [
+    PrimarySideBarComponent,
+    FileExplorerComponent,
+    ExtensionsComponent,
+    DebugComponent,
+    SearchComponent,
+    VcsComponent,
+    FolderComponent,
+  ],
   exports: [PrimarySideBarComponent],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SharedModule],
 })
 export class PrimarySideBarModule {}

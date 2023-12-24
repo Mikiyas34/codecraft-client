@@ -13,7 +13,6 @@ export class OpenedFilesComponent implements OnInit {
   ngOnInit(): void {
     this.data.openedFiles.subscribe((files) => {
       this.openedFiles = files;
-      console.log('changes', files);
     });
     this.data.activeFile.subscribe((file) => {
       this.activeFile = file;
@@ -23,6 +22,16 @@ export class OpenedFilesComponent implements OnInit {
     this.data.activeFile.next(file);
   }
   closeFile(file: File) {
-    this.data.openedFiles.value.splice(this.openedFiles.indexOf(file));
+    const newOpenedFilesArray: File[] = [];
+    const oldOpenedFilesArray = this.data.openedFiles.getValue();
+    oldOpenedFilesArray.forEach((f) => {
+      if (f != file) {
+        newOpenedFilesArray.push(f);
+      }
+    });
+    if (newOpenedFilesArray.length > 0) {
+      this.data.activeFile.next(newOpenedFilesArray[0]);
+    }
+    this.data.openedFiles.next(newOpenedFilesArray);
   }
 }

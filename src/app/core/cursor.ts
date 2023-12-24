@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { getIndexOfElem, placeByIndex } from '../util';
 import { ICursor } from './cursor.d';
 import { writer } from './writer';
@@ -6,14 +7,14 @@ cursorElem.classList.add('cursor');
 export const cursor: ICursor = {
   elem: null,
   cursorElem: cursorElem,
-  ln: 0,
-  col: 0,
+  ln: new BehaviorSubject<number>(0),
+  col: new BehaviorSubject<number>(0),
 
   moveTo: function (ln: number, col: number): void {
-    this.ln = ln;
-    this.col = col;
+    this.ln.next(ln);
+    this.col.next(col);
+    this.removeCursors();
     const line = writer.getLine(ln);
-    cursorElem.remove();
     const charElem = writer.getChar(ln, col);
     if (charElem?.parentElement?.classList.contains('word')) {
       const parentWord = charElem.parentElement;
@@ -25,6 +26,12 @@ export const cursor: ICursor = {
       placeByIndex(line!, cursorElem, index + 1);
     }
     // placeByIndex(line!, cursorElem, col);
+  },
+  removeCursors() {
+    const cursors = document.querySelectorAll('.cursor');
+    while (cursors.length > 1) {
+      cursors.item(0).remove();
+    }
   },
   hide() {
     this.elem!.style.display = 'none';

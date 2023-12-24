@@ -22,7 +22,7 @@ export const writer: IWriter = {
       cursor.moveTo(ln, col);
     } else {
       line?.appendChild(charElem);
-      cursor.moveTo(cursor.ln, cursor.col + 1);
+      cursor.moveTo(cursor.ln.getValue(), cursor.col.getValue() + 1);
     }
   },
   writeText(text: string) {
@@ -30,7 +30,6 @@ export const writer: IWriter = {
       this.createLine(false);
     }
     const text_arr = convertTextToArray(text);
-    console.log(text_arr);
     let currInsertionLine = 0;
     text_arr.forEach((word) => {
       if (word == '\t') {

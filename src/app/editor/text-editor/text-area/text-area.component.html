@@ -1,8 +1,43 @@
-<div #textArea class="text-area">
+<div
+  #textArea
+  class="text-area"
+  [style.display]="openedFiles.length > 0 ? 'flex' : 'none'"
+>
   <ul class="ln-numbers">
-    <li class="ln-num">1</li>
-    <li class="ln-num">2</li>
-    <li class="ln-num">3</li>
+    <li class="ln-num" *ngFor="let lnNum of lines; let i = index">
+      {{ i + 1 }}
+    </li>
   </ul>
   <div class="lines"></div>
+</div>
+<div class="suggestions" *ngIf="openedFiles.length < 1">
+  <img src="assets/gemstone-logo-gray.svg" alt="gemstone logo gray" />
+  <div class="suggestion">
+    <span class="description">Show All Commands</span>
+    <div class="short-cut">
+      <span class="btn">Ctrl</span>
+      <span>+</span>
+      <span class="btn">Shift</span>
+      <span>+</span>
+      <span class="btn">P</span>
+    </div>
+  </div>
+  <div class="suggestion">
+    <span class="description">Open File</span>
+    <div class="short-cut">
+      <span class="btn">Ctrl</span>
+      <span>+</span>
+      <span class="btn">O</span>
+    </div>
+  </div>
+  <div class="suggestion">
+    <span class="description">Open Folder</span>
+    <div class="short-cut">
+      <span class="btn">Ctrl</span>
+      <span>+</span>
+      <span class="btn">Shift</span>
+      <span>+</span>
+      <span class="btn">O</span>
+    </div>
+  </div>
 </div>

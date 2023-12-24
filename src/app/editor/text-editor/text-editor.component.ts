@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  HostListener,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-import { cursor } from 'src/app/core/cursor';
-import { writer } from 'src/app/core/writer';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-text-editor',

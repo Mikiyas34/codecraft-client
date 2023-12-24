@@ -1,6 +1,5 @@
 export function convertTextToArray(text: string) {
   text = text.replaceAll('\n', ' \n ');
-  console.log('text: ', text);
   const text_arr = [];
   let curr_word = '';
   for (let char of text) {

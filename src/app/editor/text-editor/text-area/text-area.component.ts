@@ -20,6 +20,8 @@ export class TextAreaComponent implements OnInit, AfterViewInit {
   @ViewChild('cursor') cursor?: ElementRef;
   @ViewChild('textArea') textArea?: ElementRef;
   @ViewChild('word') word?: ElementRef;
+  lines: any[] = [];
+  openedFiles: File[] = [];
   constructor(private data: DataService) {}
   ngAfterViewInit() {
     writer.elem = this.textArea?.nativeElement;
@@ -29,27 +31,29 @@ export class TextAreaComponent implements OnInit, AfterViewInit {
       cursorOpacity = cursorOpacity == '1' ? '0' : '1';
       cursor.cursorElem!.style.opacity = cursorOpacity;
     }, 500);
-    const text = `const bob = 'hello';\nconsole.log(bob)\nlet t = bob\nfunction hello(){}`;
-    writer.writeText(text);
-  }
-
-  ngOnInit(): void {
     this.data.activeFile.subscribe((file) => {
       writer.clearAll();
       const reader = new FileReader();
       reader.onload = (e) => {
         writer.writeText(e.target?.result as string);
+        this.lines = [];
+        const linesElem = writer.elem?.querySelector('.lines');
+        linesElem?.childNodes.forEach((node) => {
+          this.lines.push(node);
+        });
       };
       reader.readAsText(file!);
     });
   }
 
+  ngOnInit(): void {
+    this.data.openedFiles.subscribe((files) => {
+      this.openedFiles = files;
+    });
+  }
+
   @HostListener('click', ['$event'])
   onClick(e: any) {
-    // if (!e.target.classList.contains('char')) {
-    //   this.focused = true;
-    //   return;
-    // }
     this.focused = true;
     if (e.target.classList.contains('char')) {
       const cursorPos = writer.getCharPos(e.target);
@@ -77,41 +81,45 @@ export class TextAreaComponent implements OnInit, AfterViewInit {
     let curr_word = '';
     switch (e.code) {
       case 'Space':
-        writer.insertChar(e.key, cursor.ln, cursor.col);
+        writer.insertChar(e.key, cursor.ln.getValue(), cursor.col.getValue());
         break;
       case 'Enter':
         writer.createLine();
         break;
       case 'Backspace':
-        writer.removeChar(cursor.ln, cursor.col);
-        cursor.moveTo(cursor.ln, cursor.col - 1);
+        writer.removeChar(cursor.ln.getValue(), cursor.col.getValue());
+        cursor.moveTo(cursor.ln.getValue(), cursor.col.getValue() - 1);
         break;
       case 'Delete':
-        writer.removeChar(cursor.ln, cursor.col);
-        cursor.moveTo(cursor.ln, cursor.col);
+        writer.removeChar(cursor.ln.getValue(), cursor.col.getValue());
+        cursor.moveTo(cursor.ln.getValue(), cursor.col.getValue());
         break;
       case 'ArrowRight':
-        cursor.moveTo(cursor.ln, cursor.col + 1);
+        cursor.moveTo(cursor.ln.getValue(), cursor.col.getValue() + 1);
         break;
       case 'ArrowLeft':
-        if (cursor.col < 0) {
-          cursor.moveTo(cursor.ln - 1, cursor.col + 1);
+        if (cursor.col.getValue() < 0) {
+          cursor.moveTo(cursor.ln.getValue() - 1, cursor.col.getValue() + 1);
           return;
         }
-        cursor.moveTo(cursor.ln, cursor.col - 1);
+        cursor.moveTo(cursor.ln.getValue(), cursor.col.getValue() - 1);
         break;
       case 'ArrowUp':
-        writer.getLine(cursor.ln)?.classList.remove('active');
-        cursor.moveTo(cursor.ln - 1, cursor.col);
-        writer.getLine(cursor.ln)?.classList.add('active');
+        writer.getLine(cursor.ln.getValue())?.classList.remove('active');
+        cursor.moveTo(cursor.ln.getValue() - 1, cursor.col.getValue());
+        writer.getLine(cursor.ln.getValue())?.classList.add('active');
         break;
       case 'ArrowDown':
-        writer.getLine(cursor.ln)?.classList.remove('active');
-        cursor.moveTo(cursor.ln + 1, cursor.col);
-        writer.getLine(cursor.ln)?.classList.add('active');
+        writer.getLine(cursor.ln.getValue())?.classList.remove('active');
+        cursor.moveTo(cursor.ln.getValue() + 1, cursor.col.getValue());
+        writer.getLine(cursor.ln.getValue())?.classList.add('active');
         break;
       default:
-        writer.insertChar(e.key, cursor.ln, cursor.col + 1);
+        writer.insertChar(
+          e.key,
+          cursor.ln.getValue(),
+          cursor.col.getValue() + 1
+        );
     }
   }
 }

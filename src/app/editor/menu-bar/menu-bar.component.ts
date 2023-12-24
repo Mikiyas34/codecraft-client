@@ -12,22 +12,13 @@ export class MenuBarComponent {
   constructor(private data: DataService) {}
   async pasteText() {
     const data = await navigator.clipboard.readText();
-    writer.insertChar(data, cursor.ln, cursor.col);
+    writer.insertChar(data, cursor.ln.getValue(), cursor.col.getValue());
   }
   onFilePickerChange(e: any) {
-    console.log(e.target.files);
     const file = e.target.files[0];
     if (file) {
       this.data.files.next([...this.data.files.getValue(), file]);
     }
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      // console.log(e.target?.result);
-      // writer.writeText(e.target?.result as string);
-    };
-
-    reader.readAsText(e.target.files[0]);
-    console.log(e.target.files);
   }
   onFolderPickerChange(e: any) {
     const files = e.target.files;
