@@ -22,6 +22,7 @@ export class MenuBarComponent {
   }
   onFolderPickerChange(e: any) {
     const files = e.target.files;
+    console.log(files);
     this.data.files.next(files);
   }
 }

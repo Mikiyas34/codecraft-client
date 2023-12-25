@@ -23,31 +23,26 @@ import { FileElement } from './file-elem';
   // standalone: true,
 })
 export class FileExplorerComponent implements OnInit, AfterViewInit {
-  files: File[] = [];
   folders: Folder[] = [];
   activeFile?: File | null;
   @ViewChild('host') host?: ElementRef;
   constructor(private data: DataService) {}
-  async ngOnInit() {
-    this.data.files.subscribe((files) => {
-      this.files = files;
+  ngOnInit() {}
+  ngAfterViewInit(): void {
+    this.data.files.subscribe((files: File[]) => {
+      const foldersPath = this.extractFolderPath(files);
+      const folders = this.initFolders(foldersPath);
+      this.folders = folders;
+      this.addFiles(files, folders);
+      const firstFolder = folders.find((f) => !f.path?.startsWith('/'));
+      this.linkFolders(folders);
+      if (firstFolder != undefined) {
+        this.host?.nativeElement.append(firstFolder?.getElem());
+      }
     });
     this.data.activeFile.subscribe((file) => {
       this.activeFile = file;
     });
-    // applicationRef.attachView(compRef.hostView);
-  }
-  ngAfterViewInit(): void {
-    const folder1 = new Folder('bob');
-    folder1.addElem(new FileElement('file.txt').getElem());
-    folder1.addElem(new FileElement('file1.txt').getElem());
-    folder1.addElem(new FileElement('file2.txt').getElem());
-    const folder2 = new Folder('tot');
-    folder2.addElem(new FileElement('bob.js').getElem());
-    folder2.addElem(new FileElement('rb.js').getElem());
-    folder2.addElem(new FileElement('4ob.js').getElem());
-    folder1.addElem(folder2.getElem());
-    this.host?.nativeElement.append(folder1.getElem());
   }
 
   addNewFolder() {
@@ -74,22 +69,63 @@ export class FileExplorerComponent implements OnInit, AfterViewInit {
       this.data.activeFile.next(file);
     }
   }
-}
 
-let prevFolder: HTMLElement;
-function listFiles(folder: any) {
-  const folderElem = document.createElement('div');
-  if (prevFolder) {
-    prevFolder.appendChild(folderElem);
-  }
-  prevFolder = folderElem;
-  for (let content of folder.contents) {
-    if (content.type == 'file') {
-      const fileElem = document.createElement('div');
-      fileElem.textContent = content.name;
-      folderElem.appendChild(fileElem);
-    } else {
-      listFiles(content);
+  extractFolderPath(files: File[]) {
+    let foldersPath: string[] = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const path = this.getParentPath(file.webkitRelativePath);
+      if (!foldersPath.includes(path)) {
+        foldersPath.push(path);
+      }
     }
+
+    return foldersPath;
+  }
+  initFolders(foldersPath: string[]) {
+    let folders: Folder[] = [];
+    foldersPath.forEach((path) => {
+      let folder = folders.find((f) => f.path == path);
+      if (!folder) {
+        folder = new Folder(this.getNameFromPath(path), path);
+        folders.push(folder);
+      }
+    });
+    return folders;
+  }
+
+  linkFolders(folders: Folder[]) {
+    folders.forEach((folder) => {
+      let parentFolderPath = this.getParentPath(folder.path!);
+      const parentFolder = folders.find((f) => f.path == parentFolderPath);
+      if (parentFolder) {
+        parentFolder.addElem(folder.getElem());
+      }
+    });
+  }
+
+  addFiles(files: File[], folders: Folder[]) {
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const fileElem = new FileElement(file.name, file);
+      fileElem.onClick((file: File) => {
+        this.data.openedFiles.next([...this.data.openedFiles.getValue(), file]);
+      });
+
+      const folder = folders.find(
+        (f) => f.path == this.getParentPath(file.webkitRelativePath)
+      );
+      if (folder) {
+        folder.addElem(fileElem.getElem());
+      }
+    }
+  }
+
+  getParentPath(path: string) {
+    return path.slice(0, path.lastIndexOf('/'));
+  }
+
+  getNameFromPath(path: string) {
+    return path.slice(path.lastIndexOf('/') + 1, path.length);
   }
 }

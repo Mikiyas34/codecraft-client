@@ -5,7 +5,9 @@ export class Folder {
   folderName = document.createElement('span');
   folderNameContainer = document.createElement('div');
   open: boolean = true;
-  constructor(name: string, open?: boolean) {
+  path?: string;
+  constructor(name: string, path?: string, open?: boolean) {
+    this.path = path;
     this.open = open || true;
     this.folderIcon.src = 'assets/folder-icon.svg';
     this.arrowIcon.src = 'assets/arrow-icon.svg';

@@ -1,6 +1,6 @@
 :host {
   width: 4rem;
-  height: 100%;
+  height: 98%;
   background: #0e0e0e;
   display: flex;
   border-top: solid 1px #494949;
@@ -15,29 +15,15 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    width: 100%;
     img {
       width: 1.6rem;
       cursor: pointer;
     }
-    .file-explorer {
-      position: relative;
-      &::after {
-        display: block;
-        content: "Explorer";
-        width: 4rem;
-        border: solid;
-        position: absolute;
-        color: #494949;
-      }
-      &::before {
-        display: block;
-        content: "";
-        width: 4rem;
-        border: solid;
-        transform: rotate(30deg);
-        position: absolute;
-        color: #494949;
-      }
+    .tab {
+    }
+    .tab.active {
+      border-left: solid orange;
     }
   }
 }

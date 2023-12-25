@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -6,8 +6,21 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './activity-bar.component.html',
   styleUrls: ['./activity-bar.component.scss'],
 })
-export class ActivityBarComponent {
+export class ActivityBarComponent implements OnInit {
+  activeBar?:
+    | 'FileExplorer'
+    | 'Extensions'
+    | 'Search'
+    | 'Debug'
+    | 'VCS'
+    | 'None';
   constructor(private data: DataService) {}
+
+  ngOnInit(): void {
+    this.data.activeBar.subscribe((bar) => {
+      this.activeBar = bar;
+    });
+  }
   setActiveBar(
     bar: 'FileExplorer' | 'Extensions' | 'Search' | 'Debug' | 'VCS' | 'None'
   ) {
