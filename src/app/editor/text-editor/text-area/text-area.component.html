@@ -1,14 +1,10 @@
-<div
-  #textArea
-  class="text-area"
-  [style.display]="openedFiles.length > 0 ? 'flex' : 'none'"
->
-  <ul class="ln-numbers">
-    <li class="ln-num" *ngFor="let lnNum of lines; let i = index">
-      {{ i + 1 }}
-    </li>
-  </ul>
-  <div class="lines"></div>
+<div class="editor-instance">
+  <div class="line-numbers" #lineNumbers></div>
+  <div
+    #textArea
+    class="text-area"
+    [style.display]="openedFiles.length > 0 ? 'flex' : 'none'"
+  ></div>
 </div>
 <div class="suggestions" *ngIf="openedFiles.length < 1">
   <img src="assets/gemstone-logo-gray.svg" alt="gemstone logo gray" />

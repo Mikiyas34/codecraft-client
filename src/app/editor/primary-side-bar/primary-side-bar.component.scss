@@ -1,10 +1,28 @@
-.active-bar {
-  background: #0d0d0d;
-  border: solid 1px #494949;
+.side-bar {
+  display: flex;
+  background: #141414;
+  height: 100%;
   width: 15rem;
+  min-height: 6rem;
+  border-right: solid 1px #494949;
+}
+.active-bar {
+  background: #141414;
+  border: solid 1px #494949;
+  border-right: none;
+  width: 100%;
   height: 100%;
   display: block;
   color: #fff;
   // width: 100%;
   // height: 100%;
+}
+.resizer {
+  height: 100%;
+  width: 0.17rem;
+  background: transparent;
+  cursor: e-resize;
+  &:hover {
+    background: blue;
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { cursor } from 'src/app/core/cursor';
-import { writer } from 'src/app/core/writer';
+import { writter } from 'src/app/core/writer';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class MenuBarComponent {
   constructor(private data: DataService) {}
   async pasteText() {
     const data = await navigator.clipboard.readText();
-    writer.insertChar(data, cursor.ln.getValue(), cursor.col.getValue());
+    // writer.insertChar(data, cursor.ln.getValue(), cursor.col.getValue());
   }
   onFilePickerChange(e: any) {
     const file = e.target.files[0];
@@ -22,7 +22,6 @@ export class MenuBarComponent {
   }
   onFolderPickerChange(e: any) {
     const files = e.target.files;
-    console.log(files);
     this.data.files.next(files);
   }
 }

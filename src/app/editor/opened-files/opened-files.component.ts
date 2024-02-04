@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-
+import {getFileIconPath, getFileExtension} from "../../util/"
 @Component({
   selector: 'app-opened-files',
   templateUrl: './opened-files.component.html',
@@ -20,6 +20,9 @@ export class OpenedFilesComponent implements OnInit {
   }
   setActiveFile(file: File) {
     this.data.activeFile.next(file);
+  }
+  getFileIcon(file:File){
+    return getFileIconPath(getFileExtension(file))
   }
   closeFile(file: File) {
     const newOpenedFilesArray: File[] = [];

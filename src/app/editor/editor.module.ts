@@ -10,6 +10,7 @@ import { PrimarySideBarModule } from './primary-side-bar/primary-side-bar.module
 import { TextAreaComponent } from './text-editor/text-area/text-area.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     EditorComponent,
@@ -20,6 +21,12 @@ import { FormsModule } from '@angular/forms';
     OpenedFilesComponent,
     TextAreaComponent,
   ],
-  imports: [MenuBarModule, PrimarySideBarModule, CommonModule, FormsModule],
+  imports: [
+    MenuBarModule,
+    HttpClientModule,
+    PrimarySideBarModule,
+    CommonModule,
+    FormsModule,
+  ],
 })
 export class EditorModule {}

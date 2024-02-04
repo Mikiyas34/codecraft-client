@@ -1,3 +1,5 @@
+import { icons } from '../core/icons';
+
 export function convertTextToArray(text: string) {
   text = text.replaceAll('\n', ' \n ');
   const text_arr = [];
@@ -5,7 +7,7 @@ export function convertTextToArray(text: string) {
   for (let char of text) {
     if (char == ' ') {
       text_arr.push(curr_word);
-      text_arr.push('\t');
+      text_arr.push('&nbsp;');
       curr_word = '';
     } else {
       curr_word = curr_word.concat(char);
@@ -15,6 +17,20 @@ export function convertTextToArray(text: string) {
   return text_arr;
 }
 
+export function createElem(
+  tagname: string,
+  className?: string | null,
+  content?: string
+): HTMLElement {
+  const elem = document.createElement(tagname);
+  if (content) {
+    elem.innerHTML = content;
+  }
+  if (className) {
+    elem.classList.add(className);
+  }
+  return elem;
+}
 export function placeByIndex(
   parentElem: HTMLElement,
   elem: HTMLElement,
@@ -48,4 +64,28 @@ export function getIndexOfElem(parent: HTMLElement, elem: HTMLElement) {
     }
   }
   return -1;
+}
+
+export function getFileExtension(file: File) {
+  let fileName = file.name;
+  let extIndex = fileName.lastIndexOf('.');
+  let ext = fileName.slice(extIndex + 1, fileName.length);
+  return ext;
+}
+
+export function getFileIconPath(fileExtension: string): string {
+  let name: string;
+  if ((icons.fileExtensions as any)[fileExtension] != undefined) {
+    name = (icons.fileExtensions as any)[fileExtension];
+    let path: string = (icons.iconDefinitions as any)[fileExtension].iconPath;
+  } else {
+  }
+
+  // let path: string = (icons.iconDefinitions as any)[name].iconPath;
+  // if (!path || path == '' || path == undefined) {
+  //   path = (icons.iconDefinitions as any)['file'].iconPath;
+  // }
+  // console.log('iconpath', path);
+  // // return "assets" + "/"  + path.slice(4, path.length)
+  return 'assets/file-icon.svg';
 }

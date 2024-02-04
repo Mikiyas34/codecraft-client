@@ -1,7 +1,7 @@
 :host {
   width: 4rem;
   height: 98%;
-  background: #0e0e0e;
+  background: #141414;
   display: flex;
   border-top: solid 1px #494949;
 
@@ -23,7 +23,7 @@
     .tab {
     }
     .tab.active {
-      border-left: solid orange;
+      border-left: solid #1c7ad1;
     }
   }
 }

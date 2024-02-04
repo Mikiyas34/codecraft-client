@@ -2,24 +2,40 @@
   <div>
     <span>EXPLORER</span>
   </div>
-  <div class="icons">
+  <div class="icons" *ngIf="folders.length > 0">
     <img
-      src="assets/add-new-file-icon.svg"
-      alt="add new file"
-      (click)="addNewFile()"
+    src="assets/add-new-file-icon.svg"
+    alt="add new file"
+    (click)="addNewFile()"
     />
     <img
-      src="assets/create-new-folder-icon.svg"
-      alt="create new folder"
-      (click)="addNewFolder()"
+    src="assets/create-new-folder-icon.svg"
+    alt="create new folder"
+    (click)="addNewFolder()"
     />
     <img src="assets/refresh-icon.svg" alt="refresh" />
     <img
-      src="assets/collapse-icon.svg"
-      alt="collapse folders"
-      title="collapse folders in explorer"
-      (click)="collapseFolders()"
+    src="assets/collapse-icon.svg"
+    alt="collapse folders"
+    title="collapse folders in explorer"
+    (click)="collapseFolders()"
     />
   </div>
 </div>
+  <div *ngIf="folders.length < 1" class="no-open-folder">
+    <p>You have not yet opened a folder.</p>
+    <button>
+      <input
+      title="Open a Folder"
+      type="file"
+      name=""
+      id=""
+      webkitdirectory
+      (change)="onFolderPickerChange($event)"
+    />
+      Open Folder</button>
+    <button>Open Recent</button>
+<p>You can open a remote repository or pull request without cloning.</p>
+<button>Open Remote Repository</button>
+  </div>
 <ul class="folders-and-files" #host></ul>

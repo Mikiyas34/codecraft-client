@@ -1,7 +1,10 @@
-<div [ngSwitch]="activeBar" class="active-bar" *ngIf="activeBar != 'None'">
-  <app-file-explorer *ngSwitchCase="'FileExplorer'"></app-file-explorer>
-  <app-extensions *ngSwitchCase="'Extensions'"></app-extensions>
-  <app-debug *ngSwitchCase="'Debug'"></app-debug>
-  <app-search *ngSwitchCase="'Search'"></app-search>
-  <app-vcs *ngSwitchCase="'VCS'"></app-vcs>
+<div #host class="side-bar">
+  <div [ngSwitch]="activeBar" class="active-bar" *ngIf="activeBar != 'None'">
+    <app-file-explorer *ngSwitchCase="'FileExplorer'"></app-file-explorer>
+    <app-extensions *ngSwitchCase="'Extensions'"></app-extensions>
+    <app-debug *ngSwitchCase="'Debug'"></app-debug>
+    <app-search *ngSwitchCase="'Search'"></app-search>
+    <app-vcs *ngSwitchCase="'VCS'"></app-vcs>
+  </div>
+  <div class="resizer" #resizer></div>
 </div>

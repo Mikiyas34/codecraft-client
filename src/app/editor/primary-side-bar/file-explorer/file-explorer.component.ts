@@ -7,14 +7,11 @@ import {
   ViewEncapsulation,
   createComponent,
 } from '@angular/core';
-import { bootstrapApplication } from '@angular/platform-browser';
-import { writer } from 'src/app/core/writer';
 import { DataService } from 'src/app/services/data.service';
-import { FolderComponent } from './folder/folder.component';
-import { AppComponent } from 'src/app/app.component';
 import { Folder } from './folder';
 import { FileElement } from './file-elem';
-
+import { getFileExtension, getFileIconPath } from 'src/app/util';
+import { icons } from '../../../core/icons';
 @Component({
   selector: 'app-file-explorer',
   templateUrl: './file-explorer.component.html',
@@ -25,9 +22,15 @@ import { FileElement } from './file-elem';
 export class FileExplorerComponent implements OnInit, AfterViewInit {
   folders: Folder[] = [];
   activeFile?: File | null;
+  selectedFileOrFolder?: FileElement | Folder;
   @ViewChild('host') host?: ElementRef;
   constructor(private data: DataService) {}
   ngOnInit() {}
+  onFolderPickerChange(e: any) {
+    const files = e.target.files;
+    this.data.files.next(files);
+    
+  }
   ngAfterViewInit(): void {
     this.data.files.subscribe((files: File[]) => {
       const foldersPath = this.extractFolderPath(files);
@@ -53,6 +56,16 @@ export class FileExplorerComponent implements OnInit, AfterViewInit {
 
   addNewFile() {
     const file = new FileElement('file.txt');
+    file.file = new File([], 'untitled');
+    file.onClick((file: File) => {
+      const openedFiles = this.data.openedFiles.getValue();
+      if (openedFiles.includes(file)) {
+        this.data.activeFile.next(file);
+      } else {
+        this.data.openedFiles.next([...openedFiles, file]);
+        this.data.activeFile.next(file);
+      }
+    });
     this.host?.nativeElement.appendChild(file.getElem());
   }
   collapseFolders() {
@@ -107,9 +120,17 @@ export class FileExplorerComponent implements OnInit, AfterViewInit {
   addFiles(files: File[], folders: Folder[]) {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      const fileElem = new FileElement(file.name, file);
+      let fileExtension = getFileExtension(file);
+      let iconPath = getFileIconPath(fileExtension);
+      const fileElem = new FileElement(file.name, iconPath, file);
       fileElem.onClick((file: File) => {
-        this.data.openedFiles.next([...this.data.openedFiles.getValue(), file]);
+        const openedFiles = this.data.openedFiles.getValue();
+        if (openedFiles.includes(file)) {
+          this.data.activeFile.next(file);
+        } else {
+          this.data.openedFiles.next([...openedFiles, file]);
+          this.data.activeFile.next(file);
+        }
       });
 
       const folder = folders.find(

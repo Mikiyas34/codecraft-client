@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Client": {
+    "gemstone-client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Client/static",
+            "outputPath": "dist/gemstone-client/static",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -58,10 +58,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Client:build:production"
+              "browserTarget": "gemstone-client:build:production"
             },
             "development": {
-              "browserTarget": "Client:build:development"
+              "browserTarget": "gemstone-client:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -69,7 +69,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Client:build"
+            "browserTarget": "gemstone-client:build"
           }
         },
         "test": {
@@ -86,7 +86,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/Client/server",
+            "outputPath": "dist/gemstone-client/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"
@@ -109,12 +109,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "Client:build:development",
-              "serverTarget": "Client:server:development"
+              "browserTarget": "gemstone-client:build:development",
+              "serverTarget": "gemstone-client:server:development"
             },
             "production": {
-              "browserTarget": "Client:build:production",
-              "serverTarget": "Client:server:production"
+              "browserTarget": "gemstone-client:build:production",
+              "serverTarget": "gemstone-client:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -126,12 +126,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "Client:build:production",
-              "serverTarget": "Client:server:production"
+              "browserTarget": "gemstone-client:build:production",
+              "serverTarget": "gemstone-client:server:production"
             },
             "development": {
-              "browserTarget": "Client:build:development",
-              "serverTarget": "Client:server:development"
+              "browserTarget": "gemstone-client:build:development",
+              "serverTarget": "gemstone-client:server:development"
             }
           },
           "defaultConfiguration": "production"
