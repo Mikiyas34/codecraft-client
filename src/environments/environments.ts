@@ -1,3 +1,8 @@
 export const environments = {
-  apiUrl: 'http://localhost:5072',
+  development: {
+    apiUrl: 'http://localhost:3000',
+  },
+  production: {
+    apiUrl: '',
+  },
 };

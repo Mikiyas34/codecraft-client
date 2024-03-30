@@ -8,7 +8,7 @@ $dark-text-color: #a8a8a8;
 :host {
   @extend %flex-display;
   width: 100%;
-  background: #121212;
+  background: #1a181a;
   justify-content: space-between;
   padding-block: 0.2rem;
 
@@ -18,7 +18,7 @@ $dark-text-color: #a8a8a8;
     padding-left: 1rem;
     font-size: 0.7rem;
     .line {
-      border-bottom: solid 1px #bbbbbb;
+      border-bottom: solid 1px #5b5b5b;
     }
     input {
       position: absolute;
@@ -31,15 +31,16 @@ $dark-text-color: #a8a8a8;
       flex-direction: column;
       position: absolute;
       background: #1d1d1d;
-      padding: 0.2rem;
       width: 13rem;
       border-radius: 1px;
-      box-shadow: #000000 1px 1px 6px 0px;
+      border: solid 1px #5b5b5b;
+      border-radius: 5px;
       span {
-        padding: 0.2rem;
+        padding: 0.5rem;
         &:hover {
-          background: #000;
+          background: #ff1d5a;
           cursor: pointer;
+          color: #fff;
         }
       }
     }
@@ -48,7 +49,7 @@ $dark-text-color: #a8a8a8;
     @extend %flex-display;
     gap: 1rem;
     img {
-      width: 1.5rem;
+      width: 1rem;
     }
   }
 }

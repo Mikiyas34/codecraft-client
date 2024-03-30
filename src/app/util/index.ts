@@ -1,15 +1,16 @@
-import { icons } from '../core/icons';
-
 export function convertTextToArray(text: string) {
   text = text.replaceAll('\n', ' \n ');
   const text_arr = [];
   let curr_word = '';
   for (let char of text) {
     if (char == ' ') {
-      text_arr.push(curr_word);
+      if (curr_word.length > 0) {
+        text_arr.push(curr_word);
+      }
       text_arr.push('&nbsp;');
       curr_word = '';
     } else {
+      // console.log(char, ' is not a space');
       curr_word = curr_word.concat(char);
     }
   }
@@ -56,6 +57,24 @@ export function placeByIndex(
   }
 }
 
+export function getIndexOfText(
+  text: string,
+  viewLine: HTMLElement,
+  x: number
+): number {
+  return 4;
+}
+
+export function modifyTextByIndex(
+  text: string,
+  add: string,
+  index: number
+): string {
+  // const index = getIndexOfText(text, null, i)
+  // text = ""
+  return 'hello';
+}
+
 export function getIndexOfElem(parent: HTMLElement, elem: HTMLElement) {
   const children = parent.childNodes;
   for (let i = 0; i < children.length; i++) {
@@ -74,13 +93,6 @@ export function getFileExtension(file: File) {
 }
 
 export function getFileIconPath(fileExtension: string): string {
-  let name: string;
-  if ((icons.fileExtensions as any)[fileExtension] != undefined) {
-    name = (icons.fileExtensions as any)[fileExtension];
-    let path: string = (icons.iconDefinitions as any)[fileExtension].iconPath;
-  } else {
-  }
-
   // let path: string = (icons.iconDefinitions as any)[name].iconPath;
   // if (!path || path == '' || path == undefined) {
   //   path = (icons.iconDefinitions as any)['file'].iconPath;

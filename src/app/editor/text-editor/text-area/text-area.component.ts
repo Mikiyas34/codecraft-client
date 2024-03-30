@@ -4,12 +4,13 @@ import {
   Component,
   ElementRef,
   HostListener,
+  Input,
   OnInit,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { cursor } from 'src/app/core/cursor';
-import { writter } from 'src/app/core/writer';
+import { writer } from 'src/app/core/writer';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -20,42 +21,40 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class TextAreaComponent implements OnInit, AfterViewInit {
   focused: boolean = false;
-  @ViewChild('cursor') cursor?: ElementRef;
   @ViewChild('textArea') textArea?: ElementRef;
   @ViewChild('lineNumbers') lineNumbers?: ElementRef;
-  @ViewChild('word') word?: ElementRef;
-  openedFiles: File[] = [];
-  constructor(private data: DataService, private http: HttpClient) {}
-  ngAfterViewInit() {
-    writter.configure(
+  @Input() File?: File;
+  async ngAfterViewInit() {
+    writer.configure(
       this.textArea?.nativeElement,
       this.lineNumbers?.nativeElement
     );
     cursor.configure(this.textArea?.nativeElement);
+    this.flickerCursor();
+    await this.writeFileDataIntoTextArea();
+
+    // writer.insertChar('', 3, 5);
+    document.addEventListener('keydown', (e) => {
+      writer.writeLine(e.key, cursor.ln.getValue(), cursor.col.getValue());
+      let cursorCol = cursor.col.getValue();
+      cursor.col.next(cursorCol++);
+    });
+  }
+  private async writeFileDataIntoTextArea() {
+    writer.writeFromText(await this.File!.text());
+  }
+
+  private flickerCursor() {
     let cursorOpacity = '0';
     setInterval(() => {
       cursorOpacity = cursorOpacity == '1' ? '0' : '1';
       cursor.cursorElem!.style.opacity = cursorOpacity;
     }, 500);
-    this.data.activeFile.subscribe((file) => {
-      // writer.clearAll();
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        writter.writeFromText(e.target?.result as string);
-        // const linesElem = writer.elem?.querySelector('.lines');
-        // linesElem?.childNodes.forEach((node: any) => {
-        // this.lines.push(node);
-        // });
-      };
-      reader.readAsText(file!);
-    });
   }
 
-  ngOnInit(): void {
-    this.data.openedFiles.subscribe((files) => {
-      this.openedFiles = files;
-    });
-  }
+  insertChar(key: string, ln: number, col: number) {}
+
+  ngOnInit(): void {}
 
   @HostListener('click', ['$event'])
   onClick(e: any) {

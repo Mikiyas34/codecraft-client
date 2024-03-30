@@ -15,13 +15,18 @@
 }
 .commit-message-input {
   width: 90%;
-  height: 2rem;
+  height: 1.7rem;
   border: none;
   outline: none;
   margin-top: 0.3rem;
   background: #242424;
   color: #d3d3d3;
   margin-bottom: 0.4rem;
+  border: solid 1px #535353;
+  border-radius: 2px;
+  &:focus {
+    border: solid 1px #1c7ad1;
+  }
 }
 
 .commit-btn {

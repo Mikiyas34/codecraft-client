@@ -1,9 +1,9 @@
 :host {
   width: 4rem;
   height: 98%;
-  background: #141414;
+  background: #1a181a;
   display: flex;
-  border-top: solid 1px #494949;
+  border-top: solid 1px #1f1f1f;
 
   flex-direction: column;
   align-items: center;
@@ -23,7 +23,7 @@
     .tab {
     }
     .tab.active {
-      border-left: solid #1c7ad1;
+      border-left: solid #ff1d5a;
     }
   }
 }

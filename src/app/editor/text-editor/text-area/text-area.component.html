@@ -1,39 +1,4 @@
 <div class="editor-instance">
   <div class="line-numbers" #lineNumbers></div>
-  <div
-    #textArea
-    class="text-area"
-    [style.display]="openedFiles.length > 0 ? 'flex' : 'none'"
-  ></div>
-</div>
-<div class="suggestions" *ngIf="openedFiles.length < 1">
-  <img src="assets/gemstone-logo-gray.svg" alt="gemstone logo gray" />
-  <div class="suggestion">
-    <span class="description">Show All Commands</span>
-    <div class="short-cut">
-      <span class="btn">Ctrl</span>
-      <span>+</span>
-      <span class="btn">Shift</span>
-      <span>+</span>
-      <span class="btn">P</span>
-    </div>
-  </div>
-  <div class="suggestion">
-    <span class="description">Open File</span>
-    <div class="short-cut">
-      <span class="btn">Ctrl</span>
-      <span>+</span>
-      <span class="btn">O</span>
-    </div>
-  </div>
-  <div class="suggestion">
-    <span class="description">Open Folder</span>
-    <div class="short-cut">
-      <span class="btn">Ctrl</span>
-      <span>+</span>
-      <span class="btn">Shift</span>
-      <span>+</span>
-      <span class="btn">O</span>
-    </div>
-  </div>
+  <div #textArea class="text-area"></div>
 </div>

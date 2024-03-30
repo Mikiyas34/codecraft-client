@@ -1,0 +1,1 @@
+function getSyntax(langId: string) {}

@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { createElem, getIndexOfElem, placeByIndex } from '../util';
+import { writer } from './writer';
 
 class Cursor {
   cursorElem?: HTMLElement;
@@ -10,13 +11,17 @@ class Cursor {
   }
   configure(textarea: HTMLElement) {
     const rect = textarea.getBoundingClientRect();
+    const rect2 = textarea.getBoundingClientRect();
     textarea.appendChild(this.cursorElem!);
     textarea.addEventListener('mousedown', (e) => {
-      console.log(e.clientX - rect.left);
-      console.log(e.clientX);
-      console.log(rect.left);
-      this.cursorElem!.style.left = e.clientX - rect!.left + 'px';
-      this.cursorElem!.style.top = e.clientY - rect!.top + 'px';
+      this.cursorElem!.style.left = e.clientX - rect.left - 15 + 'px';
+      textarea.querySelectorAll('.view-line').forEach((line, i) => {
+        if (line.contains(e.target as HTMLElement)) {
+          console.log('line index: ', i);
+          this.cursorElem!.style.top = (line as HTMLElement).offsetTop + 'px';
+          this.ln.next(i + 1);
+        }
+      });
     });
   }
   moveTo(ln: number, col: number) {}

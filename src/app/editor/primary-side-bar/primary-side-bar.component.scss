@@ -1,14 +1,14 @@
 .side-bar {
   display: flex;
-  background: #141414;
+  background: #1a181a;
   height: 100%;
   width: 15rem;
   min-height: 6rem;
-  border-right: solid 1px #494949;
+  border-right: solid 1px #1f1f1f;
 }
 .active-bar {
-  background: #141414;
-  border: solid 1px #494949;
+  background: #1a181a;
+  border: solid 1px #1f1f1f;
   border-right: none;
   width: 100%;
   height: 100%;
@@ -23,6 +23,6 @@
   background: transparent;
   cursor: e-resize;
   &:hover {
-    background: blue;
+    background: #ff1d5a;
   }
 }

@@ -11,7 +11,7 @@ import { DataService } from 'src/app/services/data.service';
 import { Folder } from './folder';
 import { FileElement } from './file-elem';
 import { getFileExtension, getFileIconPath } from 'src/app/util';
-import { icons } from '../../../core/icons';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-file-explorer',
   templateUrl: './file-explorer.component.html',
@@ -24,12 +24,26 @@ export class FileExplorerComponent implements OnInit, AfterViewInit {
   activeFile?: File | null;
   selectedFileOrFolder?: FileElement | Folder;
   @ViewChild('host') host?: ElementRef;
-  constructor(private data: DataService) {}
+  constructor(private data: DataService, private http: HttpClient) {}
   ngOnInit() {}
-  onFolderPickerChange(e: any) {
-    const files = e.target.files;
-    this.data.files.next(files);
-    
+  async onFolderPickerChange(e: any) {
+    if ('showDirectoryPicker' in window) {
+      const handle = await (window as any).showDirectoryPicker();
+      console.log(handle);
+      new RegExp('hello', '\\A(?:\\xEF\\xBB\\xBF)?(?i:(?=\\s*@charset\\b))');
+    } else {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.multiple = true;
+      fileInput.click();
+    }
+    // const files = e.target.files;
+    // this.data.files.next(files);
+    // console.log(e.target.files);
+
+    //     this.http.post("localhost:3000/open-folder", {
+    // // path: files[0].webkitRelativePath.slice(0, )
+    //     })
   }
   ngAfterViewInit(): void {
     this.data.files.subscribe((files: File[]) => {

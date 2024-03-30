@@ -1,8 +1,8 @@
 $dark-text-color: #a8a8a8;
 :host {
-  color: $dark-text-color;
   position: relative;
   z-index: 1000;
+  color: #adadad;
   span {
     padding: 0.1rem;
     padding-inline: 0.4rem;

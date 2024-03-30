@@ -3,7 +3,7 @@
   height: 2rem;
   border: solid 1px #494949;
   border-left: none;
-  background: #121212;
+  background: #1a181a;
   display: flex;
   .file.active {
     color: #a7a7a7;
@@ -20,7 +20,7 @@
       width: 0.57rem;
     }
     .file-icon {
-     width: 1rem; 
+      width: 1rem;
     }
     .close-icon {
       position: absolute;
@@ -47,8 +47,8 @@
       width: 0.57rem;
     }
     .file-icon {
-      width: 1rem; 
-     }
+      width: 1rem;
+    }
     .close-icon {
       display: none;
       position: absolute;

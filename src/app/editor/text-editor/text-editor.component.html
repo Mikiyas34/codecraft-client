@@ -1,1 +1,38 @@
-<app-text-area></app-text-area>
+<app-opened-files></app-opened-files>
+
+<app-text-area
+  [File]="openedFile"
+  *ngFor="let openedFile of openedFiles"
+  [style.display]="activeFile == openedFile ? 'block' : 'none'"
+></app-text-area>
+<div class="suggestions" *ngIf="openedFiles.length < 1">
+  <img src="assets/gemstone-logo-gray.svg" alt="gemstone logo gray" />
+  <div class="suggestion">
+    <span class="description">Show All Commands</span>
+    <div class="short-cut">
+      <span class="btn">Ctrl</span>
+      <span>+</span>
+      <span class="btn">Shift</span>
+      <span>+</span>
+      <span class="btn">P</span>
+    </div>
+  </div>
+  <div class="suggestion">
+    <span class="description">Open File</span>
+    <div class="short-cut">
+      <span class="btn">Ctrl</span>
+      <span>+</span>
+      <span class="btn">O</span>
+    </div>
+  </div>
+  <div class="suggestion">
+    <span class="description">Open Folder</span>
+    <div class="short-cut">
+      <span class="btn">Ctrl</span>
+      <span>+</span>
+      <span class="btn">Shift</span>
+      <span>+</span>
+      <span class="btn">O</span>
+    </div>
+  </div>
+</div>

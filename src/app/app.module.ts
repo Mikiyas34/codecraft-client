@@ -13,7 +13,7 @@ import { EditorComponent } from './editor/editor.component';
   imports: [
     RouterModule.forRoot([
       {
-        path: 'editor',
+        path: '',
         component: EditorComponent,
         data: { animation: 'newPage' },
       },

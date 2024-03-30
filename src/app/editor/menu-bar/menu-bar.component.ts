@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { cursor } from 'src/app/core/cursor';
-import { writter } from 'src/app/core/writer';
+import { writer } from 'src/app/core/writer';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
