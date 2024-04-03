@@ -20,26 +20,13 @@ class Writer {
         case 'ArrowRight':
           cursor.moveToLeft();
           break;
-        // how hi are you
       }
     });
   }
 
-  writeLine(text: string, ln: number, col: number) {
-    const line = this.getLine(ln);
-    let lineText = this.extractLineText(line);
-    console.log('text: ', text);
-    let newText = this.insertStrByIndex(lineText, col, text);
-    console.log('newtext: ', newText);
-    const text_arr = convertTextToArray(newText);
-    console.log(text_arr);
-    this.removeChildrenofAnElement(line);
-    for (let i = 0; i < text_arr.length; i++) {
-      const char = text_arr[i];
-      console.log(char);
-      const wordElem = createElem('span', '', char);
-      line?.appendChild(wordElem);
-    }
+  updateLine(text: string, ln: number) {}
+  insertChar(char: string, ln: number, col: number) {
+    console.log('inserting char: ', char, ' at position ', ln + ':' + col);
   }
   private insertStrByIndex(dist: string, index: number, src: string) {
     let newText = '';
@@ -52,7 +39,6 @@ class Writer {
         newText = newText.concat(char);
       }
     }
-    console.log('newnewText: ', newText);
     return newText;
   }
 
@@ -71,72 +57,25 @@ class Writer {
     }
   }
 
-  writeFromText(text: string) {
-    // const languageFeature = language_features.find((lf) =>
-    //   lf.languages.includes(getFileExtension(activeFile))
-    // );
+  insertLine(text: string, ln: number) {
+    text = text.replaceAll(' ', '&nbsp;');
+    const lineElem = createElem('div', 'view-line', text);
+    this.textarea?.appendChild(lineElem);
+  }
 
-    const text_arr = convertTextToArray(
-      text
-      // languageFeature?.separateTexts || []
-    );
-    let curr_line: HTMLElement | null = null;
-    let lineCount: number = 1;
-    for (let i = 0; i < text_arr.length; i++) {
-      const word = text_arr[i];
-      //if there's no line create the first line
-      if (!curr_line) {
-        curr_line = createElem('div', 'view-line');
-        // const prevWord = text_arr[i - 1];
-        // const nextWord = text_arr[i + 1];
-        curr_line.appendChild(createElem('span', '', word));
-        this.textarea?.appendChild(curr_line);
-        const lineNumElem = createElem(
-          'div',
-          'line-number',
-          lineCount.toString()
-        );
-        lineCount += 1;
-        this.lineNumbers?.appendChild(lineNumElem);
-      } else if (curr_line && word != '\n') {
-        // let prevWord = text_arr[i - 1];
-        // let j = 1;
-        // while (prevWord == '&nbsp;') {
-        //   prevWord = text_arr[i - j];
-        //   j++;
-        // }
-        // let nextWord = text_arr[i + 1];
-        // j = 1;
-        // while (nextWord == '&nbsp;') {
-        //   nextWord = text_arr[i + j];
-        //   j++;
-        // }
-        curr_line.appendChild(
-          createElem(
-            'span',
-            '',
-            // languageFeature?.getClassName(word, prevWord, nextWord),
-            word
-          )
-        );
-      } else {
-        curr_line = createElem('div', 'view-line');
-        this.textarea?.appendChild(curr_line);
-        const lineNumElem = createElem(
-          'div',
-          'line-number',
-          lineCount.toString()
-        );
-        lineCount += 1;
-        this.lineNumbers?.appendChild(lineNumElem);
-      }
-    }
+  writeFromText(text: string) {
+    const lines = text.split('\n');
+    console.log(lines);
+    let lineCount = 1;
+    lines.forEach((line) => {
+      this.insertLine(line, 0);
+      this.lineNumbers?.appendChild(
+        createElem('div', 'ln-num', `${lineCount}`)
+      );
+      lineCount++;
+    });
   }
-  insertChar(char: string, ln: number, col: number) {
-    const line = this.getLine(ln);
-    let charElem = line?.children.item(col);
-    console.log(charElem);
-  }
+
   getLineByCord(y: number) {
     const lines = this.textarea?.querySelectorAll('.view-line');
     return lines?.item(y);

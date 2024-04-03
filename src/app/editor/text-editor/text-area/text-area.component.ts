@@ -33,9 +33,25 @@ export class TextAreaComponent implements OnInit, AfterViewInit {
     this.flickerCursor();
     await this.writeFileDataIntoTextArea();
 
+    (this.textArea?.nativeElement as HTMLElement).addEventListener(
+      'mousedown',
+      (e) => {
+        const target = e.target as HTMLElement;
+        const targetRect = target.getBoundingClientRect();
+        const textareaRect =
+          this.textArea?.nativeElement.getBoundingClientRect();
+        if (target.classList.contains('view-line')) {
+          console.log(target);
+          console.log(targetRect);
+          cursor.moveTo(targetRect.top - textareaRect.top, 0);
+        }
+      }
+    );
+
     // writer.insertChar('', 3, 5);
     document.addEventListener('keydown', (e) => {
-      writer.writeLine(e.key, cursor.ln.getValue(), cursor.col.getValue());
+      console.log(e);
+      writer.insertChar(e.key, cursor.ln.getValue(), cursor.col.getValue());
       let cursorCol = cursor.col.getValue();
       cursor.col.next(cursorCol++);
     });
