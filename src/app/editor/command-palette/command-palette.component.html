@@ -1,0 +1,14 @@
+<div class="palette">
+  <div class="command-input">
+    <input type="text" #input />
+  </div>
+  <div class="options">
+    <div
+      class="option"
+      *ngFor="let command of commands"
+      (click)="command.click()"
+    >
+      {{ command.name }}
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import { TextAreaComponent } from './text-editor/text-area/text-area.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CommandPaletteComponent } from './command-palette/command-palette.component';
 @NgModule({
   declarations: [
     EditorComponent,
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     TextEditorComponent,
     OpenedFilesComponent,
     TextAreaComponent,
+    CommandPaletteComponent,
   ],
   imports: [
     MenuBarModule,

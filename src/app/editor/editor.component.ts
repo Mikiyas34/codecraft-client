@@ -1,7 +1,10 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnInit,
+  Renderer2,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { DataService } from '../services/data.service';
@@ -17,7 +20,13 @@ import { getFileExtension } from '../util';
 })
 export class EditorComponent implements OnInit, AfterViewInit {
   activatedLanguageFeatures: any[] = [];
-  constructor(private data: DataService, private http: HttpClient) {}
+  commandPalette: boolean = false;
+  @ViewChild('commandPalette') commandPaletteElem?: ElementRef;
+  constructor(
+    private data: DataService,
+    private http: HttpClient,
+    private renderer: Renderer2
+  ) {}
   ngOnInit(): void {
     this.http.get('http://localhost:3000').subscribe({
       next: (value) => {
@@ -29,22 +38,17 @@ export class EditorComponent implements OnInit, AfterViewInit {
     });
   }
   ngAfterViewInit(): void {
-    this.data.activeFile.subscribe((file) => {
-      const fileExt = getFileExtension(file!);
-      // const currentLanguageFeature = language_features.find((lf) =>
-      //   lf.languages.includes(fileExt)
-      // );
-      // const language_feature_active = this.activatedLanguageFeatures.includes(
-      //   currentLanguageFeature
-      // );
-      // if (language_feature_active) {
-      //   currentLanguageFeature?.use(file!);
-      // } else {
-      //   currentLanguageFeature?.activate(file!);
-      //   this.activatedLanguageFeatures.push(currentLanguageFeature);
-      // }
+    this.renderer.listen(document, 'mousedown', (e) => {
+      const commandPaletteElem = this.commandPaletteElem?.nativeElement;
+      console.log(commandPaletteElem);
+      if (commandPaletteElem && !commandPaletteElem.contains(e.target)) {
+        this.commandPalette = false;
+      }
     });
-
-    // writter.writeFromText('Hello how is it going\ni am good');
+    this.renderer.listen(document, 'keydown', (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.code == 'KeyP') {
+        this.commandPalette = true;
+      }
+    });
   }
 }
