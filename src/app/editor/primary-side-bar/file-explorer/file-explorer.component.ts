@@ -51,10 +51,10 @@ export class FileExplorerComponent implements OnInit, AfterViewInit {
       const folders = this.initFolders(foldersPath);
       this.folders = folders;
       this.addFiles(files, folders);
-      const firstFolder = folders.find((f) => !f.path?.startsWith('/'));
+      const baseFolder = folders.find((f) => !f.path?.startsWith('/'));
       this.linkFolders(folders);
-      if (firstFolder != undefined) {
-        this.host?.nativeElement.append(firstFolder?.getElem());
+      if (baseFolder != undefined) {
+        this.host?.nativeElement.append(baseFolder?.getElem());
       }
     });
     this.data.activeFile.subscribe((file) => {

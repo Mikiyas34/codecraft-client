@@ -36,24 +36,51 @@ export class TextAreaComponent implements OnInit, AfterViewInit {
     (this.textArea?.nativeElement as HTMLElement).addEventListener(
       'mousedown',
       (e) => {
-        const target = e.target as HTMLElement;
-        const targetRect = target.getBoundingClientRect();
-        const textareaRect =
-          this.textArea?.nativeElement.getBoundingClientRect();
-        if (target.classList.contains('view-line')) {
-          console.log(target);
-          console.log(targetRect);
-          cursor.moveTo(targetRect.top - textareaRect.top, 0);
-        }
+        const textareaRect = (
+          this.textArea?.nativeElement as HTMLElement
+        ).getBoundingClientRect();
+        const x = e.clientX - textareaRect.left;
+        const y = e.clientY - textareaRect.top;
+        console.log('Y: ', Math.floor(y / 19));
+        console.log('X: ', Math.floor(x / 8));
+        cursor.moveTo(Math.floor(y / 19), Math.floor(x / 8));
       }
     );
 
     // writer.insertChar('', 3, 5);
     document.addEventListener('keydown', (e) => {
-      console.log(e);
-      writer.insertChar(e.key, cursor.ln.getValue(), cursor.col.getValue());
-      let cursorCol = cursor.col.getValue();
-      cursor.col.next(cursorCol++);
+      console.log(e.code);
+      let col = cursor.col.getValue();
+      let ln = cursor.ln.getValue();
+      switch (e.code) {
+        case 'ArrowLeft':
+          console.log(col);
+          cursor.moveTo(ln, col - 1);
+          break;
+        case 'ArrowRight':
+          cursor.moveTo(ln, col + 1);
+          break;
+        case 'ArrowUp':
+          cursor.moveTo(ln - 1, col);
+          break;
+        case 'ArrowDown':
+          cursor.moveTo(ln + 1, col);
+          break;
+        case 'Enter':
+          break;
+        case 'Backspace':
+          cursor.moveTo(ln, col - 1);
+
+          break;
+        default:
+          if (e.shiftKey) {
+            writer.insertChar(e.key.toUpperCase(), ln, col);
+            cursor.moveTo(ln, col + 1);
+          } else {
+            writer.insertChar(e.key, ln, col);
+            cursor.moveTo(ln, col + 1);
+          }
+      }
     });
   }
   private async writeFileDataIntoTextArea() {

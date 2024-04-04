@@ -22,6 +22,12 @@
       height: 2rem;
       background: #3c3c3c;
       border: solid 1px #535353;
+      color: #c1c1c1;
+      border-radius: 2px;
+      outline: none;
+      &:focus {
+        border: solid #ff1d5a 1px;
+      }
     }
   }
   .options {

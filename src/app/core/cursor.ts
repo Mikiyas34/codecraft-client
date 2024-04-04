@@ -15,7 +15,11 @@ class Cursor {
     textarea.appendChild(this.cursorElem);
   }
   moveTo(ln: number, col: number) {
-    this.cursorElem!.style.top = ln + 'px';
+    console.log('c', col);
+    this.cursorElem!.style.top = ln * 19 + 'px';
+    this.cursorElem!.style.left = col * 8 + 'px';
+    this.ln.next(ln);
+    this.col.next(col);
   }
   moveToLeft() {
     let cursorLeft = parseInt(this.cursorElem?.style.left || '1');

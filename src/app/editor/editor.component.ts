@@ -47,6 +47,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
     });
     this.renderer.listen(document, 'keydown', (e: KeyboardEvent) => {
       if (e.ctrlKey && e.shiftKey && e.code == 'KeyP') {
+        e.preventDefault();
         this.commandPalette = true;
       }
     });

@@ -5,6 +5,7 @@ import {
   HostListener,
   ViewChild,
 } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-command-palette',
@@ -42,20 +43,33 @@ export class CommandPaletteComponent implements AfterViewInit {
   commands: { name: string; click: () => void }[] = this.all_commands;
   @ViewChild('input') inputElem?: ElementRef;
 
+  constructor(private data: DataService) {}
   ngAfterViewInit(): void {
-    this.inputElem?.nativeElement.focus();
+    const inputElem = this.inputElem?.nativeElement;
+    // this.inputElem?.nativeElement.focus();
+    if (inputElem && !inputElem.value.startsWith('>')) {
+      this.commands = [];
+    }
     let inputValue = '';
     this.inputElem?.nativeElement.addEventListener('input', (e: any) => {
       console.log(inputValue);
       if (e.target.value) {
         inputValue = e.target.value;
       }
-      if (inputValue.trim() == '') {
-        this.commands = this.all_commands;
-        console.log('oioi');
+      if (inputElem && !inputElem.value.startsWith('>')) {
+        this.commands = [];
+        const files = this.data.files.getValue();
+        files.forEach((file) => {
+          this.commands.push({
+            name: file.name,
+            click() {},
+          });
+        });
       } else {
         const matchingCommands = this.all_commands.filter((command) =>
-          command.name.toLocaleLowerCase().includes(inputValue)
+          command.name
+            .toLocaleLowerCase()
+            .includes(inputValue.slice(1, inputValue.length))
         );
         console.log(matchingCommands);
         this.commands = matchingCommands;

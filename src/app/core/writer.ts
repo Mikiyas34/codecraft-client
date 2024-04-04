@@ -14,35 +14,37 @@ class Writer {
   configure(textArea: HTMLElement, lineNumbers: HTMLElement) {
     this.textarea = textArea;
     this.lineNumbers = lineNumbers;
+  }
 
-    document.addEventListener('keydown', (e) => {
-      switch (e.code) {
-        case 'ArrowRight':
-          cursor.moveToLeft();
-          break;
-      }
+  updateLine(text: string, ln: number) {
+    const line = this.getLine(ln + 1);
+    if (!line) {
+      return;
+    }
+
+    this.removeLineContent(line as HTMLElement);
+    text = text.replaceAll(' ', '&nbsp;');
+    text = text.replaceAll('&nbsp;', ' &nbsp; ');
+    const words = text.split(' ');
+    words.forEach((word) => {
+      const wordElem = createElem('span', '', word);
+      line.appendChild(wordElem);
     });
   }
-
-  updateLine(text: string, ln: number) {}
-  insertChar(char: string, ln: number, col: number) {
-    console.log('inserting char: ', char, ' at position ', ln + ':' + col);
-  }
-  private insertStrByIndex(dist: string, index: number, src: string) {
-    let newText = '';
-    for (let i = 0; i < dist.length; i++) {
-      const char = dist[i];
-      if (i == index) {
-        newText = newText.concat(char);
-        newText = newText.concat(src);
-      } else {
-        newText = newText.concat(char);
-      }
+  removeLineContent(line: HTMLElement) {
+    for (let i = 0; i < line?.children.length; i) {
+      const child = line.children[i];
+      child.remove();
     }
-    return newText;
+  }
+  insertChar(char: string, ln: number, col: number) {
+    const line = this.getLine(ln + 1);
+    const text = this.extractLineText(line!);
+    const newText = this.insertCharByIndex(text, char, col);
+    this.updateLine(newText, ln);
   }
 
-  private extractLineText(line: Element | undefined) {
+  private extractLineText(line: Element) {
     let lineText = '';
     for (let i = 0; i < line!.children.length; i++) {
       const child = line?.children[i];
@@ -51,15 +53,15 @@ class Writer {
     return lineText;
   }
 
-  private removeChildrenofAnElement(elem: Element | undefined) {
-    for (let i = 0; i < elem!.children.length; i) {
-      elem?.children[i].remove();
-    }
-  }
-
   insertLine(text: string, ln: number) {
+    const lineElem = createElem('div', 'view-line');
     text = text.replaceAll(' ', '&nbsp;');
-    const lineElem = createElem('div', 'view-line', text);
+    text = text.replaceAll('&nbsp;', ' &nbsp; ');
+    const words = text.split(' ');
+    words.forEach((word) => {
+      const wordElem = createElem('span', '', word);
+      lineElem.appendChild(wordElem);
+    });
     this.textarea?.appendChild(lineElem);
   }
 
