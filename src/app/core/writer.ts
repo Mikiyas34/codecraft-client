@@ -37,6 +37,12 @@ class Writer {
       child.remove();
     }
   }
+  removeChar(ln: number, col: number) {
+    const line = this.getLine(ln + 1);
+    let text = this.extractLineText(line!);
+    text = text.slice(0, col) + text.slice(col + 1);
+    this.updateLine(text, ln);
+  }
   insertChar(char: string, ln: number, col: number) {
     const line = this.getLine(ln + 1);
     const text = this.extractLineText(line!);

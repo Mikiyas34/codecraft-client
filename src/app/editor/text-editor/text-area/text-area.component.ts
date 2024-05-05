@@ -33,19 +33,39 @@ export class TextAreaComponent implements OnInit, AfterViewInit {
     this.flickerCursor();
     await this.writeFileDataIntoTextArea();
 
+    let mousedown = false;
     (this.textArea?.nativeElement as HTMLElement).addEventListener(
       'mousedown',
       (e) => {
+        mousedown = true;
         const textareaRect = (
           this.textArea?.nativeElement as HTMLElement
         ).getBoundingClientRect();
         const x = e.clientX - textareaRect.left;
         const y = e.clientY - textareaRect.top;
-        console.log('Y: ', Math.floor(y / 19));
-        console.log('X: ', Math.floor(x / 8));
         cursor.moveTo(Math.floor(y / 19), Math.floor(x / 8));
       }
     );
+
+    document.addEventListener('mousemove', (e) => {
+      if (!mousedown) {
+        return;
+      }
+      const textareaRect = (
+        this.textArea?.nativeElement as HTMLElement
+      ).getBoundingClientRect();
+
+      const x = e.clientX - textareaRect.left;
+      const y = e.clientY - textareaRect.top;
+      console.clear();
+      console.log('start');
+      console.log(cursor.ln.getValue(), cursor.col.getValue());
+      console.log('end');
+      console.log(x / 8, y / 19);
+    });
+    document.addEventListener('mouseup', (e) => {
+      mousedown = false;
+    });
 
     // writer.insertChar('', 3, 5);
     document.addEventListener('keydown', (e) => {
@@ -69,8 +89,12 @@ export class TextAreaComponent implements OnInit, AfterViewInit {
         case 'Enter':
           break;
         case 'Backspace':
-          cursor.moveTo(ln, col - 1);
-
+          writer.removeChar(ln, col);
+          if (col < 0 ) {
+            cursor.moveTo(ln - 1, col);
+          } else {
+            cursor.moveTo(ln, col - 1);
+          }
           break;
         default:
           if (e.shiftKey) {
