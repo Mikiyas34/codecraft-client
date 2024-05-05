@@ -25,7 +25,7 @@ Getting started with Gemstone is a breeze:
 
 ### Contribute:
 
-We're always looking to make Gemstone even better! If you've got ideas, bug fixes, or just want to say hi, feel free to contribute. Check out our [contribution guidelines](CONTRIBUTING.md) for more info.
+We're always looking to make Gemstone even better! If you've got ideas, bug fixes, or just want to say hi, feel free to contribute. Check out our [contribution guidelines](./CONTRIBUTING.md) for more info.
 
 ### Support:
 
