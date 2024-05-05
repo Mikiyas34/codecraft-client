@@ -1,9 +1,9 @@
 
-Thanks for wanting to contribute to Gemstone - you rock! Here's a quick guide on how you can get involved and make Gemstone even better:
+Thanks for wanting to contribute to Codecraft - you rock! Here's a quick guide on how you can get involved and make Codecraft even better:
 
-### Contributing to Gemstone:
+### Contributing to Codecraft:
 
-1. **Fork the Repository:** Start by forking the Gemstone repository to your GitHub account. This will create a copy of the project that you can freely experiment with.
+1. **Fork the Repository:** Start by forking the Codecraft repository to your GitHub account. This will create a copy of the project that you can freely experiment with.
 
 2. **Clone the Repository:** Next, clone your forked repository to your local machine using the `git clone` command followed by the repository's URL.
 
@@ -15,7 +15,7 @@ Thanks for wanting to contribute to Gemstone - you rock! Here's a quick guide on
 
 6. **Push Your Changes:** Push your changes to your forked repository on GitHub using the `git push` command. This will make your changes visible to others and ready for review.
 
-7. **Submit a Pull Request:** Finally, submit a pull request (PR) to the main Gemstone repository. In your PR, provide a clear description of the changes you've made and any relevant context. Our team will review your contribution and provide feedback if needed.
+7. **Submit a Pull Request:** Finally, submit a pull request (PR) to the main Codecraft repository. In your PR, provide a clear description of the changes you've made and any relevant context. Our team will review your contribution and provide feedback if needed.
 
 ### Code Guidelines:
 
@@ -27,12 +27,12 @@ Thanks for wanting to contribute to Gemstone - you rock! Here's a quick guide on
 ### Communication:
 
 - Feel free to open an issue to discuss potential changes or features before starting work on them.
-- Stay engaged with the Gemstone community by participating in discussions and providing feedback on others' contributions.
+- Stay engaged with the Codecraft community by participating in discussions and providing feedback on others' contributions.
 
 ### Thank You:
 
-We truly appreciate your interest in contributing to Gemstone. Every contribution, no matter how small, helps make Gemstone better for everyone. Together, let's build something amazing!
+We truly appreciate your interest in contributing to Codecraft. Every contribution, no matter how small, helps make Codecraft better for everyone. Together, let's build something amazing!
 
 ---
 
-Ready to dive in and make your mark on Gemstone? We can't wait to see what you come up with! If you have any questions or need assistance along the way, don't hesitate to reach out. Happy coding! 🌟🚀
+Ready to dive in and make your mark on Codecraft? We can't wait to see what you come up with! If you have any questions or need assistance along the way, don't hesitate to reach out. Happy coding! 🌟🚀
