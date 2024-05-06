@@ -2,6 +2,8 @@ Welcome to Codecraft - your next favorite code editor project! 🚀
 
 Codecraft is all about making your coding experience smooth, sleek, and supercharged. Whether you're crafting the next big app or hacking away on a side project, Codecraft has got your back.
 
+Codecraft is built with angular.
+
 ### Features:
 
 1. **Intuitive Interface:** Say goodbye to clutter! Codecraft's sleek interface keeps distractions at bay, letting you focus on what matters most - your code.
@@ -20,7 +22,7 @@ Getting started with Codecraft is a breeze:
 
 1. Clone this repository to your local machine.
 2. Install the required dependencies using `npm install`.
-3. Fire up Codecraft with `npm start`.
+3. Fire up Codecraft with `ng serve`.
 4. Start coding like a boss!
 
 ### Contribute:
